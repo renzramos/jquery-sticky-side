@@ -8,7 +8,7 @@ Tags: sticky,sidebar,stick,side
 */
 (function ( $ ) {
  
-    $.fn.stickyRose = function( options ) {
+    $.fn.stickySide = function( options ) {
         
         // default
         var settings = $.extend({
@@ -25,7 +25,11 @@ Tags: sticky,sidebar,stick,side
         var win = $(window);
 		var stickSidebar =  $(settings.selector) ;
 		var stickSidebarHeight =  stickSidebar.outerHeight();
-		var stickSidebarParentWidth = stickSidebar.closest('div').width();
+
+		var stickSidebarParent = stickSidebar.closest('div') ;
+		stickSidebarParent.css('position','relative');
+		
+		var stickSidebarParentWidth = stickSidebarParent.width();
 
 		var mainContainerOffset = $(this).offset().top;
 		var mainContainerHeight = $(this).outerHeight();
@@ -54,7 +58,6 @@ Tags: sticky,sidebar,stick,side
         };
 
         // initialize
-
 		initStickyFloating();
 
 		win.scroll(function(){
@@ -63,10 +66,11 @@ Tags: sticky,sidebar,stick,side
 
 		win.resize(function(){
 			initStickyFloating();
+			initStickyFloating();
 		});
 
 		function initStickyFloating(){
-			if (win.width() >= settings.responsive.min && win.width() <= settings.responsive.max ){
+			if (win.width() >= settings.responsive.min && win.width() <= settings.responsive.max){
 				var scrollTop = win.scrollTop();
 
 				if (scrollTop >= mainContainerOffset - settings.gapTop){
